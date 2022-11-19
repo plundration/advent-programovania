@@ -1,0 +1,3 @@
+#!/bin/sh
+cd /web/fluf/server
+node build/server.js

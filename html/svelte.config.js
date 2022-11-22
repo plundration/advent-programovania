@@ -6,9 +6,7 @@ import preprocess from 'svelte-preprocess';
 export default {
 	preprocess: preprocess(),
 	kit: {
-		adapter: adapter({
-			fallback: '200.html'
-		}),
+		adapter: adapter({ fallback: 'index.html' }),
 		prerender: { entries: [] },
 	}
 };

@@ -7,7 +7,9 @@
 	<p>stuff</p>
 </main>
 
-<style lang="scss">
+<style lang='scss' type='text/scss'>
+    @import 'Settings.scss';
+
     main {
         text-align: center;
         padding: 1em;
@@ -20,7 +22,7 @@
     }
 
     h1 {
-        color: #ff3e00;
+        color: $clr-accent1;
         text-transform: uppercase;
         font-size: 4em;
         font-weight: 100;

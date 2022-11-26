@@ -1,21 +1,13 @@
-import dayjs from 'dayjs';
 import mysql from 'mysql';
 import express from 'express';
+import PocketBase from 'pocketbase';
 
 import admin from './admin';
+import secret from './secret';
 
 module database {
-    export const sql: mysql.Connection = mysql.createConnection({
-        socketPath: '/run/mysqld/mysqld.sock',
-        user: 'root',
-        dateStrings: true,
-        database: 'advent',
-    });
-
-    sql.connect((err) => {
-        if (err) throw err;
-        console.log('Connected to SQL database');
-    });
+    export const pb = new PocketBase('https://localhost:8090')
+    pb.admins.authWithPassword(secret.pbEmail, secret.pbPassword);
 }
 
 export default database;

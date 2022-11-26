@@ -1,10 +1,15 @@
 // import adapter from '@sveltejs/adapter-auto';
 import adapter from '@sveltejs/adapter-static';
-import preprocess from 'svelte-preprocess';
+import sveltePreprocess from 'svelte-preprocess';
+import { mdsvex } from 'mdsvex';
 
 /** @type {import('@sveltejs/kit').Config} */
 export default {
-	preprocess: preprocess(),
+    extensions: ['.svelte', '.svx', '.md'],
+	preprocess: [ 
+        sveltePreprocess(),
+        mdsvex({ extensions: ['.md', '.svx'] })
+    ],
 	kit: {
 		adapter: adapter({ fallback: 'index.html' }),
 		prerender: { entries: [] },

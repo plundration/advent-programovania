@@ -14,7 +14,13 @@
 			"files": [
 				"**/*.svelte"
 			],
-			"processor": "svelte3/svelte3"
+			"processor": "svelte3/svelte3",
+			"rules": {
+				"quotes": [
+					"error",
+					"single"
+				]
+			}
 		}
 	],
 	"settings": {},

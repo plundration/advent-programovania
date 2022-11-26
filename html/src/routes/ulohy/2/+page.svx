@@ -1,0 +1,8 @@
+<script>
+    let x = 10;
+    let title = "Custom title";
+</script>
+
+# {title}
+
+number x = {x}

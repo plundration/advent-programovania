@@ -5,13 +5,24 @@
     let day = 2;
 </script>
 
+<h1>Advent programovania</h1>
+
 <p>
     Advent programovania 2022 je súťaž v programovaní s 18 úlohami od 6. po 23.
     decembra. Tohtoročný advent pokračuje v šľapajách minuloročného a navyše
     bude každá úloha sprevádzaná krátkou lekciou/vysvetlením problematiky.
 </p>
+<p>
+    Bodovací systém je orientovaný tak, aby počet odovzdaných úloh nehral
+    najväčšiu rolu v hodnotení, keďže nie každý si vie vždy nájsť čas na
+    riešenie.
+</p>
+<p>
+    Úlohy sú hodnotené podľa troch kategórií: kreativita, optimalizácia a
+    prehľadnosť kódu.
+</p>
 
-<h3>Ulohy</h3>
+<h2>Úlohy</h2>
 
 <div class="grid">
     {#each Array(18) as _, index (index)}
@@ -31,6 +42,10 @@
 
 <style lang="scss">
     @import '../Settings.scss';
+    
+    p {
+        margin: 0.8em 0;
+    }
 
     .grid {
         display: grid;

@@ -1,4 +1,0 @@
-build/
-tsconfig.tsbuildinfo
-node_modules/
-src/secret.ts

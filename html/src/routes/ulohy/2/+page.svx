@@ -1,8 +1,12 @@
 <script>
     let x = 10;
     let title = "Custom title";
+
+    let increment = () => {x += 1};
 </script>
 
 # {title}
 
 number x = {x}
+
+<button on:click={()=>increment()}> click me! </button>

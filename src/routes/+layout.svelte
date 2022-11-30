@@ -63,5 +63,6 @@
     .page-container {
         max-width: 800px;
         width: 100%;
+        margin: 3vh 0;
     }
 </style>

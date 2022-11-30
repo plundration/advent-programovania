@@ -1,14 +1,19 @@
 <script lang="ts">
-    import TextField from '@smui/textfield';
-    import Button from '@smui/button';
+    import Input from '$/components/TextField.svelte';
+    import Button from '$/components/Button.svelte';
     
-    let email: string | null = null;
-    let heslo: string | null = null;
+    let email: string = '';
+    let heslo: string = '';
+    
+    function canSubmit(vars: string[]): boolean {
+        return vars.every(value => value !== '');
+    }
 </script>
 
-<TextField variant="filled" bind:value={email} label="Email" />
-<TextField variant="filled" bind:value={heslo} label="Heslo" />
-<Button variant="raised">Login</Button>
+<Input name="email" placeholder="Email" type="email" bind:value={email} />
+<Input name="heslo" placeholder="Heslo" type="password" bind:value={heslo} />
+
+<Button disabled={!canSubmit([email, heslo])}>Login</Button>
 
 <style lang="scss">
 </style>

@@ -33,12 +33,8 @@
     },
     "type": "module",
     "dependencies": {
-        "@smui/button": "^7.0.0-beta.0",
-        "@smui/select": "^7.0.0-beta.0",
-        "@smui/textfield": "^7.0.0-beta.0",
         "@sveltejs/adapter-node": "^1.0.0-next.101",
         "sass": "^1.56.1",
-        "smui-theme": "^7.0.0-beta.0",
         "svelte-recaptcha-v2": "^0.0.2",
         "zod": "^3.19.1"
     }

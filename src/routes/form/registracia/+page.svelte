@@ -1,25 +1,24 @@
 <script lang="ts">
-    import TextField from '@smui/textfield';
-    import Button from '@smui/button';
+    import Input from '$/components/TextField.svelte';
+    import Button from '$/components/Button.svelte';
 
-    import { Recaptcha, recaptcha, observer } from 'svelte-recaptcha-v2';
     import config from '$/config';
     import { onMount } from 'svelte';
 
-    let meno: string | null = null;
-    let email: string | null = null;
-    let heslo: string | null = null;
-    let hesloConfirm: string | null = null;
-    let captcha: string | null = null;
+    let meno: string = '';
+    let email: string = '';
+    let heslo: string = '';
+    let hesloConfirm: string = '';
+    let captcha: string = '';
 
-    onMount(async () => {
+    onMount(() => {
         (window as any).captchaCallback = (clientCode: string) => {
             captcha = clientCode;
         };
     });
-    
-    function canSubmit(): boolean {
-        return meno !== null && email !== null && heslo !== null && hesloConfirm !== null && captcha !== null;
+
+    function canSubmit(vars: string[]): boolean {
+        return vars.every(value => value !== '');
     }
 </script>
 
@@ -27,14 +26,14 @@
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </svelte:head>
 
-<TextField variant="filled" bind:value={meno} label="Meno" type="text" />
-<TextField variant="filled" bind:value={email} label="Email" type="email" />
-<TextField variant="filled" bind:value={heslo} label="Heslo" type="password" />
-<TextField
-    variant="filled"
-    bind:value={hesloConfirm}
-    label="Potvrdiť heslo"
+<Input name="email" placeholder="Email" type="email" bind:value={email} />
+<Input name="meno" placeholder="Meno" type="text" bind:value={meno} />
+<Input name="heslo" placeholder="Heslo" type="password" bind:value={heslo} />
+<Input
+    name="hesloConfirm"
+    placeholder="Potvrdiť heslo"
     type="password"
+    bind:value={hesloConfirm}
 />
 
 <div
@@ -44,4 +43,6 @@
     data-callback="captchaCallback"
 />
 
-<Button variant="raised" disabled={captcha === null}>Registrovať</Button>
+<Button disabled={!canSubmit([meno, email, heslo, hesloConfirm, captcha])}>
+    Registrovať
+</Button>

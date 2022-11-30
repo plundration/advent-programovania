@@ -1,6 +1,6 @@
-<div class="form">
+<form class="form" method="POST">
     <slot />
-</div>
+</form>
 
 <style lang="scss">
     .form {

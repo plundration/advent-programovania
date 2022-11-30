@@ -1,6 +1,6 @@
-# Úloha 1
+## Názov úlohy
 
 *Zadanie*
 
 - [link](https://google.com)
-- whoah markdown
+- whoah **markdown**

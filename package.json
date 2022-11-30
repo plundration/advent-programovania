@@ -8,9 +8,7 @@
         "preview": "vite preview",
         "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
         "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-        "lint": "eslint .",
-        "prepare": "npm run smui-theme",
-        "smui-theme": "smui-theme compile static/smui.css -i src/theme"
+        "lint": "eslint ."
     },
     "devDependencies": {
         "@sveltejs/adapter-auto": "next",

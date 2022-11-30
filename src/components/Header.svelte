@@ -1,13 +1,7 @@
-<script lang="ts">
-    import NavLink from './NavLink.svelte';
-</script>
-
 <header>
     <div class="header-title">&lt;ADVENT/&gt;</div>
     <div class="header-links">
-        <NavLink href="/">domov</NavLink>
-        <NavLink href="/form/login">login</NavLink>
-        <NavLink href="/form/registracia">registracia</NavLink>
+        <slot />
     </div>
 </header>
 
@@ -23,10 +17,15 @@
         height: min(6vh, 60px);
     }
 
+    @media (max-width: $mobile-width) {
+        .header-links {
+            display: none;
+        }
+    }
+
     :global {
         .header-links a {
-            padding: 0.1em 0.3em;
-            font-size: 1em;
+            padding: 0.03em 0.25em;
             border-radius: 2px;
             margin: 0.2em;
 

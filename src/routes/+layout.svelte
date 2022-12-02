@@ -1,35 +1,29 @@
-<script>
+<script lang="ts">
+    import type { LayoutData, PageData } from './$types';
+
     import NavLink from '$/components/NavLink.svelte';
     import Header from '$/components/Header.svelte';
     import Burger from '$/components/Burger.svelte';
-    // export const ssr = false;
+
     export const prerender = true;
+	export let data: LayoutData;
+    
+    let links = [
+        { name: 'domov', href: '/' },
+        { name: 'login', href: '/form/login' },
+        { name: 'registracia', href: '/form/registracia' },
+    ]
 </script>
 
-<div id="app" data-sveltekit-preload>
-    <Header>
-        <NavLink href="/">domov</NavLink>
-        <NavLink href="/form/login">login</NavLink>
-        <NavLink href="/form/registracia">registracia</NavLink>
-    </Header>
-    <Burger>
-        <div class="burger-container">
-            <div class="burger-links">
-                <!-- Close on click: todo -->
-                <NavLink className="burger-link" href="/">domov</NavLink>
-                <NavLink className="burger-link" href="/form/login">login</NavLink>
-                <NavLink className="burger-link" href="/form/registracia">registracia</NavLink>
-            </div>
-        </div>
-    </Burger>
+<div id="app">
+    <Header {links} />
+    <Burger {links} />
 
     <main>
         <div class="page-container">
             <slot />
         </div>
     </main>
-
-    <!-- <footer /> -->
 </div>
 
 <style type="scss">
@@ -51,27 +45,6 @@
             &:hover {
                 opacity: 0.9;
                 scale: 1.07;
-            }
-        }
-
-        .burger-container {
-            padding: 3vh 5vw;
-
-            .burger-links {
-                display: flex;
-                flex-direction: column;
-
-                .burger-link {
-                    font-size: 2em;
-                    width: fit-content;
-
-                    &.active {
-                        padding: 0.02em 0.3em;
-                        border-radius: 0.1em;
-                        color: $clr-light;
-                        background-color: $clr-accent1;
-                    }
-                }
             }
         }
     }

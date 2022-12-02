@@ -1,7 +1,14 @@
+<script lang="ts">
+    import NavLink from './NavLink.svelte';
+    export let links: { name: string; href: string }[];
+</script>
+
 <header>
     <div class="header-title">&lt;ADVENT/&gt;</div>
     <div class="header-links">
-        <slot />
+        {#each links as link}
+            <NavLink href={link.href}>{link.name}</NavLink>
+        {/each}
     </div>
 </header>
 

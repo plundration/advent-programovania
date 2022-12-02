@@ -10,6 +10,10 @@
     }
 </script>
 
+<svelte:head>
+    <title>Login</title>
+</svelte:head>
+
 <Input name="email" placeholder="Email" type="email" bind:value={email} />
 <Input name="heslo" placeholder="Heslo" type="password" bind:value={heslo} />
 

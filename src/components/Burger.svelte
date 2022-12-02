@@ -1,12 +1,14 @@
 <script lang="ts">
     import { onMount } from 'svelte';
+    import NavLink from './NavLink.svelte';
+    export let links: { name: string; href: string }[];
 
     let menuIsOpen = false;
-    
-    export const toggleMenu = () => {
+
+    function toggleMenu() {
         menuIsOpen = !menuIsOpen;
-    };
-    
+    }
+
     onMount(() => {
         window.addEventListener('keydown', () => {
             menuIsOpen = false;
@@ -25,7 +27,13 @@
 <div class="burger-overlay" class:active={menuIsOpen} on:click={toggleMenu} />
 
 <div class="burger-menu" class:open={menuIsOpen}>
-    <slot />
+    <div class="burger-container">
+        <div class="burger-links">
+            {#each links as link}
+                <NavLink on:click={toggleMenu} className="burger-link" href={link.href}>{link.name}</NavLink>
+            {/each}
+        </div>
+    </div>
 </div>
 
 <style lang="scss">
@@ -99,7 +107,25 @@
     }
 
     :global {
-        .burger-menu {
+        .burger-container {
+            padding: 3vh 5vw;
+
+            .burger-links {
+                display: flex;
+                flex-direction: column;
+
+                .burger-link {
+                    font-size: 2em;
+                    width: fit-content;
+
+                    &.active {
+                        padding: 0.02em 0.3em;
+                        border-radius: 0.1em;
+                        color: $clr-light;
+                        background-color: $clr-accent1;
+                    }
+                }
+            }
         }
     }
 </style>

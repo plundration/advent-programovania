@@ -45,7 +45,7 @@ const registerSchema = z
 
 import type { Actions } from './$types';
 export const actions: Actions = {
-	default: async ({ request, fetch }) => {
+	default: async ({ request, fetch, locals }) => {
 		const formData = Object.fromEntries(await request.formData());
 		console.log('Form Data:', formData);
 
@@ -72,13 +72,14 @@ export const actions: Actions = {
 		}
 
 		try {
-			console.log('Successful registration');
-			// const newUser = await pb.users.create(result);
-			// const { token, user } = await pb.users.authViaEmail(result.email, result.heslo);
-			// const updatedProfile = await pb.records.update('profiles', user.profile.id, {
-			// 	name: result.meno
-			// });
-			// pb.authStore.clear();
+			const userParams = {
+				email: result.email,
+				password: result.heslo
+			};
+
+			const newUser = await locals.pb.collection('users').create();
+			const { token, record } = await locals.pb.collection('users').authWithPassword(result.email, result.heslo);
+			locals.pb.authStore.clear();
 		} catch (err) {
 			console.log('Error:', err);
 			return {
@@ -86,7 +87,7 @@ export const actions: Actions = {
 				message: err
 			};
 		}
-		
+
 		throw redirect(303, '/form/login');
 	}
 };

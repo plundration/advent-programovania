@@ -1,6 +1,6 @@
 {
-    "name": "html",
-    "version": "0.0.1",
+    "name": "advent",
+    "version": "1.0.0",
     "private": true,
     "scripts": {
         "dev": "vite dev",
@@ -33,6 +33,7 @@
     "type": "module",
     "dependencies": {
         "@sveltejs/adapter-node": "^1.0.0-next.101",
+        "pocketbase": "^0.8.2",
         "sass": "^1.56.1",
         "svelte-recaptcha-v2": "^0.0.2",
         "zod": "^3.19.1"

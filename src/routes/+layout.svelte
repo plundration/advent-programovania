@@ -54,6 +54,11 @@
                 scale: 1.07;
             }
         }
+        
+        h1 {
+            font-family: $ff-pixel;
+            font-size-adjust: 0.7;
+        }
     }
 
     :root {
@@ -69,7 +74,6 @@
 
         display: flex;
         flex-direction: column;
-        // font-size: 1.3rem;
         font-size: max(min(2.8vw, 1.1em), 0.9em);
     }
 
@@ -81,7 +85,7 @@
     }
 
     .page-container {
-        max-width: 800px;
+        max-width: 1300px;
         width: 100%;
         margin: 3vh min(4vw, 1em);
     }

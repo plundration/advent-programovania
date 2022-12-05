@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { PageData } from './$types';
-    
-    let data: PageData;
+
+    export let data: PageData;
 </script>
 
 <h1>Advent programovania</h1>
@@ -11,45 +11,52 @@
     decembra. Tohtoročný advent pokračuje v šľapajách minuloročného a navyše
     bude každá úloha sprevádzaná krátkou lekciou/vysvetlením problematiky.
 </p>
+
+<div class="ulohy">
+    <h2>Úlohy</h2>
+    <div class="grid">
+        {#each Array(18) as _, index (index)}
+            {#if index + 1 <= data.day}
+                <a class="grid-item" href="/ulohy/{index + 1}">
+                    <div class="item-title">{index + 1}</div>
+                    <div class="item-date">{index + 6}. dec</div>
+                </a>
+            {:else}
+                <div class="grid-item item-faded">
+                    <div class="item-title">{index + 1}</div>
+                    <div class="item-date">{index + 6}. dec</div>
+                </div>
+            {/if}
+        {/each}
+    </div>
+</div>
+
 <p>
     Bodovací systém je orientovaný tak, aby počet odovzdaných úloh nehral
     najväčšiu rolu v hodnotení, keďže nie každý si vie vždy nájsť čas na
     riešenie.
 </p>
 <p>
-    Úlohy sú hodnotené podľa troch kategórií: kreativita, optimalizácia a
-    prehľadnosť kódu.
+    Úlohy sú hodnotené podľa troch kategórií:
+    <b>kreativita, optimalizácia a prehľadnosť kódu.</b>
 </p>
-
-<h2>Úlohy</h2>
-
-<div class="grid">
-    {#each Array(18) as _, index (index)}
-        {#if index + 1 <= data.day + 3}
-            <a class="grid-item" href="/ulohy/{index + 1}">
-                <div class="item-title">{index + 1}</div>
-                <div class="item-date">{index + 6}. dec</div>
-            </a>
-        {:else}
-            <div class="grid-item item-faded">
-                <div class="item-title">{index + 1}</div>
-                <div class="item-date">{index + 6}. dec</div>
-            </div>
-        {/if}
-    {/each}
-</div>
 
 <style lang="scss">
     @import '../Settings.scss';
-    
+
     p {
         margin: 0.8em 0;
+    }
+    
+    .ulohy {
+        margin: 1.5em 0;
     }
 
     .grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-        gap: 15px;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 16px;
+        margin-top: 0.5em;
     }
 
     .grid-item {
@@ -59,13 +66,13 @@
         background-color: $clr-dark-lighter;
         text-align: center;
         text-decoration: none;
-        color: $clr-accent2;
+        color: $clr-accent1;
         font-weight: 900;
         font-family: $ff-mono;
     }
 
     .item-title {
-        font-size: 1.5em;
+        font-size: 1.8em;
     }
 
     .item-date {
@@ -73,6 +80,6 @@
     }
 
     .item-faded {
-        filter: opacity(0.5);
+        filter: opacity(0.3);
     }
 </style>

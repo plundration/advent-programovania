@@ -1,8 +1,7 @@
 <script lang="ts">
-    import { each } from 'svelte/internal';
-
-    // let day = new Date().getDay() - 5;
-    let day = 2;
+    import type { PageData } from './$types';
+    
+    let data: PageData;
 </script>
 
 <h1>Advent programovania</h1>
@@ -26,7 +25,7 @@
 
 <div class="grid">
     {#each Array(18) as _, index (index)}
-        {#if index + 1 <= day}
+        {#if index + 1 <= data.day + 3}
             <a class="grid-item" href="/ulohy/{index + 1}">
                 <div class="item-title">{index + 1}</div>
                 <div class="item-date">{index + 6}. dec</div>

@@ -1,9 +1,11 @@
-import type { ServerLoad } from '@sveltejs/kit';
+import type { User } from '$/types';
+import type { LayoutServerLoad } from './$types';
 
-export const load: ServerLoad = ({ locals }) => {
-	if (locals.user && locals.user.profile) {
-		return {
-			profile: JSON.parse(JSON.stringify(locals.user.profile))
-		};
-	}
+export const load: LayoutServerLoad = ({ locals }) => {
+	console.log('a');
+
+	return {
+		day: new Date().getDay() - 5,
+		user: locals.user ? <typeof locals.user>JSON.parse(JSON.stringify(locals.user)) : null
+	};
 };

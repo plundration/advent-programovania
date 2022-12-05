@@ -1,23 +1,30 @@
 <script lang="ts">
-    import type { LayoutData, PageData } from './$types';
+    import type { LayoutServerData } from './$types';
 
     import NavLink from '$/components/NavLink.svelte';
     import Header from '$/components/Header.svelte';
-    import Burger from '$/components/Burger.svelte';
 
     export const prerender = true;
-	export let data: LayoutData;
+    export let data: LayoutServerData;
     
-    let links = [
-        { name: 'domov', href: '/' },
-        { name: 'login', href: '/form/login' },
-        { name: 'registracia', href: '/form/registracia' },
-    ]
+    let links: { name: string, href: string }[] = [];
+    
+    if (data.user) {
+        links = [
+            { name: 'Domov', href: '/' },
+            { name: 'Logout', href: '/form/logout' },
+        ];
+    } else {
+        links = [
+            { name: 'Domov', href: '/' },
+            { name: 'Login', href: '/form/login' },
+            { name: 'Register', href: '/form/registracia' },
+        ];
+    }
 </script>
 
 <div id="app">
     <Header {links} />
-    <Burger {links} />
 
     <main>
         <div class="page-container">
@@ -53,6 +60,7 @@
         background-color: $clr-dark;
         color: $clr-light;
         font-family: $ff-primary;
+        font-size: 1.4rem;
     }
 
     #app {
@@ -61,7 +69,8 @@
 
         display: flex;
         flex-direction: column;
-        font-size: 1.3rem;
+        // font-size: 1.3rem;
+        font-size: max(min(2.8vw, 1.1em), 0.9em);
     }
 
     main {

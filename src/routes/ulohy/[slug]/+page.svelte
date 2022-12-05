@@ -63,8 +63,10 @@
         margin: 1em;
     }
 
-    article {
-        font-size: 0.8em;
+    @media screen and (min-width: $mobile-width) {
+        article {
+            font-size: 0.8em;
+        }
     }
 
     :global {

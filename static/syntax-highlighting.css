@@ -7,7 +7,6 @@
 
 
 code {
-	padding: 0.1em 0.3em;
 	font-size: 0.8em;
 	color: lightcoral;
 	background-color: #442a1d;
@@ -32,7 +31,6 @@ pre[class*="language-"] {
 	-moz-hyphens: none;
 	-ms-hyphens: none;
 	hyphens: none;
-	font-size: 1.0em;
 }
 
 /* Code blocks */

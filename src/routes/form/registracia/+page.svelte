@@ -4,12 +4,15 @@
 
     import config from '$/config';
     import { onMount } from 'svelte';
+    import type { ActionData } from './$types';
 
     let meno: string = '';
     let email: string = '';
     let heslo: string = '';
     let hesloConfirm: string = '';
     let captcha: string = '';
+
+    export let form: ActionData;
 
     onMount(() => {
         (window as any).captchaCallback = (clientCode: string) => {
@@ -46,3 +49,16 @@
 <Button disabled={!canSubmit([meno, email, heslo, hesloConfirm, captcha])}>
     Registrovať
 </Button>
+
+{#if form?.error}
+    <p class="error-message">{form?.message}</p>
+{/if}
+
+<style lang="scss">
+    @import '../../../Settings.scss';
+
+    .error-message {
+        color: $clr-error;
+    }
+</style>
+

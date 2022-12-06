@@ -10,14 +10,14 @@ import { z } from 'zod';
 const registerSchema = z
 	.object({
 		email: z
-			.string({ required_error: 'Email is required' })
-			.min(1, { message: 'Email is required' })
-			.max(64, { message: 'Email must be less than 64 characters' })
-			.email({ message: 'Email must be a valid email address' }),
+			.string({ required_error: 'Email je povinný' })
+			.min(5, { message: 'Príliš krátky email' })
+			.max(100, { message: 'Email musí byť kratší než 100 symbolov' })
+			.email({ message: 'Nevalidný email' }),
 		heslo: z
-			.string({ required_error: 'Password is required' })
-			.min(6, { message: 'Password must be at least 6 characters' })
-			.max(32, { message: 'Password must be less than 32 characters' })
+			.string({ required_error: 'Heslo je povinné' })
+			.min(6, { message: 'Heslo musí byť dlhšie než 6 symbolov' })
+			.max(32, { message: 'Heslo musí byť kratšie než 32 symbolov' })
 			.trim()
 	});
 
@@ -31,19 +31,15 @@ export const actions: Actions = {
 		try {
 			result = registerSchema.parse(formData);
 		} catch (err) {
-			const { fieldErrors: errors } = (err as z.ZodError).flatten();
-			const { heslo, ...rest } = formData;
-			return { data: rest, errors };
+			const error = (err as z.ZodError).errors[0];
+			return { error: true, message: error.message };
 		}
 
 		try {
 			await locals.pb.collection('users').authWithPassword(result.email, result.heslo);
 		} catch (err) {
 			console.log('Error:', err);
-			return {
-				error: true,
-				message: err
-			};
+			return { error: true, message: err };
 		}
 
 		throw redirect(303, '/');

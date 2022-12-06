@@ -1,19 +1,14 @@
 import PocketBase from 'pocketbase';
 
-const pb = new PocketBase('http://127.0.0.1:8090');
+const pb = new PocketBase('https://advent.gympos.sk/pb');
 
-try {
-    const userParams = {
-        username: 'daklfj',
-        email: 'fajd@jfakl.com',
-        password: 'palino01',
-        passwordConfirm: 'palino01',
-        name: 'meno',
-        emailVisibility: false,
-    };
-    
-    await pb.collection('users').create(userParams);
+const userParams = {
+    username: 'daklfj',
+    email: 'fajd@jfakl.com',
+    password: 'palino01',
+    passwordConfirm: 'palino01',
+    name: 'meno',
+    emailVisibility: false,
+};
 
-} catch (err) {
-    console.log(err);
-}
+await pb.collection('users').create(userParams);

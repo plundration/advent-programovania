@@ -20,40 +20,32 @@
     <svelte:component this={data.content} />
 </article>
 
-<!-- TODO -->
 <div class="submission">
+    {#if odovzdane}
+        <div class="is-submitted">
+            Už odovzdané
+            <img
+                class="check"
+                src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Eo_circle_green_checkmark.svg"
+                alt="checkmark"
+            />
+        </div>
+    {/if}
     <div class="file-form">
-        <b style="padding: 0.5em;">Už zajtra budete môcť odovzdávať úlohy</b>
+        <div class="file-picker">
+            <label>
+                Vyberte súbor
+                <input accept="text/*" bind:files type="file" />
+            </label>
+            {#if files}
+                {#each files as file}
+                    <span>{file.name}</span>
+                {/each}
+            {/if}
+        </div>
+        <Button disabled={!files || files.length === 0}>Odovzdať</Button>
     </div>
 </div>
-
-{#if false}
-    <div class="submission">
-        {#if odovzdane}
-            <div class="is-submitted">
-                Už odovzdané <img
-                    class="check"
-                    src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Eo_circle_green_checkmark.svg"
-                    alt="checkmark"
-                />
-            </div>
-        {/if}
-        <div class="file-form">
-            <div class="file-picker">
-                <label>
-                    Vyberte súbor
-                    <input accept="text/*" bind:files type="file" />
-                </label>
-                {#if files}
-                    {#each files as file}
-                        <span>{file.name}</span>
-                    {/each}
-                {/if}
-            </div>
-            <Button disabled={!files || files.length === 0}>Odovzdať</Button>
-        </div>
-    </div>
-{/if}
 
 <style lang="scss">
     @import '../../../Settings.scss';
@@ -71,9 +63,8 @@
 
     :global {
         .markdown-article {
-            p {
-                padding: 0.5em 0;
-            }
+            p { margin: 0.5em 0; }
+            h1, h2, h3, h4 { margin: 1.0em 0 0.2em 0; }
         }
     }
 

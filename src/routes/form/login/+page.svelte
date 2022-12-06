@@ -1,9 +1,13 @@
 <script lang="ts">
     import Input from '$/components/TextField.svelte';
     import Button from '$/components/Button.svelte';
+
+    import type { ActionData } from './$types';
     
     let email: string = '';
     let heslo: string = '';
+
+    export let form: ActionData;
     
     function canSubmit(vars: string[]): boolean {
         return vars.every(value => value !== '');
@@ -19,5 +23,15 @@
 
 <Button disabled={!canSubmit([email, heslo])}>Login</Button>
 
+{#if form?.error}
+    <p class="error-message">{form?.message}</p>
+{/if}
+
 <style lang="scss">
+    @import '../../../Settings.scss';
+
+    .error-message {
+        color: $clr-error;
+    }
 </style>
+

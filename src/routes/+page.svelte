@@ -17,7 +17,11 @@
     <div class="grid">
         {#each Array(18) as _, index (index)}
             {#if index + 1 <= data.day}
-                <a class="grid-item" href="/ulohy/{index + 1}">
+                <a
+                    class="grid-item"
+                    class:item-done={data.submissions && data.submissions[index]}
+                    href="/ulohy/{index + 1}"
+                >
                     <div class="item-title">{index + 1}</div>
                     <div class="item-date">{index + 6}. dec</div>
                 </a>
@@ -47,7 +51,7 @@
     p {
         margin: 0.8em 0;
     }
-    
+
     .ulohy {
         margin: 1.5em 0;
     }
@@ -81,5 +85,10 @@
 
     .item-faded {
         filter: opacity(0.3);
+    }
+    
+    .item-done::after {
+        content: 'DONE';
+        color: $clr-checkmark;
     }
 </style>

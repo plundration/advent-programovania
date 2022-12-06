@@ -87,8 +87,15 @@
         filter: opacity(0.3);
     }
     
-    .item-done::after {
-        content: 'DONE';
-        color: $clr-checkmark;
+    .item-done .item-title::after {
+        content: "✓";
+    }
+        
+    .item-done .item-title {
+        color: #00b000;
+    }
+        
+    .item-done {
+        background-color: #00ff0020;
     }
 </style>

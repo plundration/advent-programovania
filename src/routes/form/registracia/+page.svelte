@@ -19,10 +19,9 @@
             captcha = clientCode;
         };
     });
-
-    function canSubmit(vars: string[]): boolean {
-        return vars.every(value => value !== '');
-    }
+    
+    let canSubmit = false;
+    $: canSubmit = meno !== '' && email !== '' && heslo !== '' && hesloConfirm !== '' && captcha !== '';
 </script>
 
 <svelte:head>
@@ -46,7 +45,7 @@
     data-callback="captchaCallback"
 />
 
-<Button disabled={!canSubmit([meno, email, heslo, hesloConfirm, captcha])}>
+<Button disabled={!canSubmit}>
     Registrovať
 </Button>
 

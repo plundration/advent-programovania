@@ -24,7 +24,6 @@ const registerSchema = z
 export const actions: Actions = {
 	default: async ({ request, locals }) => {
 		const formData = Object.fromEntries(await request.formData());
-		console.log('Form Data:', formData);
 
 		let result;
 

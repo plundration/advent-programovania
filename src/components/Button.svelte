@@ -1,9 +1,11 @@
 <script lang="ts">
     export let onClick: () => void = () => {};
     export let disabled: boolean = false;
+    export let formaction: string | null = null;
+    export let type: string | null = null;
 </script>
 
-<button on:click={onClick} {disabled}>
+<button on:click={onClick} {disabled} {formaction} {type}>
     <slot />
 </button>
 

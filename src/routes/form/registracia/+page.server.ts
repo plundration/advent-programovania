@@ -1,6 +1,10 @@
-import { z } from 'zod';
 import { redirect } from '@sveltejs/kit';
 
+import { z } from 'zod';
+
+import Pocketbase from 'pocketbase';
+
+import config from '$/config';
 import secret from '$/secret.server';
 
 const registerSchema = z
@@ -44,6 +48,7 @@ const registerSchema = z
 	});
 
 import type { Actions } from './$types';
+
 export const actions: Actions = {
 	default: async ({ request, fetch, locals }) => {
 		const formData = Object.fromEntries(await request.formData());
@@ -77,11 +82,15 @@ export const actions: Actions = {
 				passwordConfirm: result.heslo,
 				name: result.meno,
 			};
+			
+			const adminPb = new Pocketbase(config.pocketbaseUrl);
 
-			const newUser = await locals.pb.collection('users').create(userParams);
+			await adminPb.admins.authWithPassword(secret.adminEmail, secret.adminPassword);
+			await adminPb.collection('users').create(userParams);
+
 			const { token, record } = await locals.pb.collection('users').authWithPassword(result.email, result.heslo);
 
-			locals.pb.authStore.clear();
+			locals.pb.authStore.clear(); // ?? optional hmm todo
 		} catch (err: any) {
 			console.log('Error:', err);
 			return { error: true, message: err?.data?.message };

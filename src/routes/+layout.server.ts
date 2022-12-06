@@ -1,3 +1,5 @@
+import { getDay } from '$/lib/utils';
+
 import type { Submission } from '$/types';
 import type { LayoutServerLoad } from './$types';
 
@@ -5,7 +7,9 @@ async function getUserSubmissions(locals: App.Locals) : Promise<Array<Submission
 	let submissions = new Array<Submission>(18);
 
 	try {
-		const result = await locals.pb.collection('submissions').getList(0, 18, { filter: `user_id == ${locals.user?.id}` });
+		// Gets submission list of current user (user only has access to his own submissions)
+		const result = await locals.pb.collection('submissions').getList(0, 18, {});
+
 		if (!result.items) return submissions;
 
 		if (result.totalItems > 18) { /* log issue to database */ }
@@ -36,9 +40,9 @@ export const load: LayoutServerLoad = async ({ locals }) => {
 	}
 
 	return {
-		day: new Date().getDate() - 5 + 1,
+		day: getDay(),
 		user: locals.user ? <typeof locals.user>JSON.parse(JSON.stringify(locals.user)) : null,
-		// submissions: submissions,
-		submissions: [true, false]
+		submissions: submissions,
+		// submissions: [true, false],
 	};
 };

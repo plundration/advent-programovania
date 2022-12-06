@@ -1,14 +1,32 @@
 <script lang="ts">
     import Button from '$/components/Button.svelte';
+    import { goto, invalidate } from '$app/navigation';
     import { page } from '$app/stores';
     import type { PageData } from './$types';
 
     export let data: PageData;
 
-    let files: FileList | null = null;
-    let odovzdane = true;
-
     let cisloUlohy = parseInt($page.url.pathname.replace(/^.*\//, ''));
+    let files: FileList | null = null;
+    
+    let odovzdane: boolean = false;
+    if (data.submissions && data.submissions[cisloUlohy - 1]) odovzdane = true
+        
+    function onSubmit() {
+        if (!files) return;
+
+        let formData = new FormData();
+        formData.append('file', files[0]);
+
+        fetch(`/ulohy/${cisloUlohy}`, {
+            method: 'POST',
+            body: formData,
+        }).then(res => {
+            window.location.href = '/' // todo need to refresh page with goto somehow
+        }).catch(err => {
+            goto('/error');
+        });
+    }
 </script>
 
 <div class="title">
@@ -35,7 +53,7 @@
         <div class="file-picker">
             <label>
                 Vyberte súbor
-                <input accept="text/*" bind:files type="file" />
+                <input name="file" accept="text/*" bind:files type="file" />
             </label>
             {#if files}
                 {#each files as file}
@@ -43,7 +61,7 @@
                 {/each}
             {/if}
         </div>
-        <Button disabled={!files || files.length === 0}>Odovzdať</Button>
+        <Button disabled={!files || files.length === 0} onClick={onSubmit}>Odovzdať</Button>
     </div>
 </div>
 
@@ -63,8 +81,15 @@
 
     :global {
         .markdown-article {
-            p { margin: 0.5em 0; }
-            h1, h2, h3, h4 { margin: 1.0em 0 0.2em 0; }
+            p {
+                margin: 0.5em 0;
+            }
+            h1,
+            h2,
+            h3,
+            h4 {
+                margin: 1em 0 0.2em 0;
+            }
         }
     }
 

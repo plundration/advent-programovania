@@ -15,7 +15,7 @@ export const actions: Actions = {
         const formData = Object.fromEntries(await request.formData());
         console.log('Form Data:', formData);
 
-        locals.pb.collection('submissions').create()
+        // locals.pb.collection('submissions').create();
 
         throw redirect(303, '/form/login');
     }

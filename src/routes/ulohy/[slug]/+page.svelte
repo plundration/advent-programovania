@@ -93,11 +93,14 @@
             p {
                 margin: 0.5em 0;
             }
-            h1,
-            h2,
-            h3,
-            h4 {
+            
+            h1, h2, h3, h4 {
                 margin: 1em 0 0.2em 0;
+            }
+            
+            blockquote {
+                padding-left: 1em; 
+                border-left: 4px solid $clr-sec;
             }
         }
     }

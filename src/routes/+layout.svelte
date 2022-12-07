@@ -6,9 +6,9 @@
 
     export const prerender = true;
     export let data: LayoutServerData;
-    
-    let links: { name: string, href: string }[] = [];
-    
+
+    let links: { name: string; href: string }[] = [];
+
     if (data.user) {
         links = [
             { name: 'Domov', href: '/' },
@@ -31,6 +31,14 @@
             <slot />
         </div>
     </main>
+
+    <footer>
+        <p>Túto súťaž pre vás pripravili:</p>
+        <p><a href="https://pavolkomlos.xyz">Pavol Alexander Komloš</a></p>
+        <p><a href="https://harmansky.xyz">Adam Harmanský</a></p>
+        <br />
+        <p>Neváhajte nás kontaktovať v prípade potreby pomoci</p>
+    </footer>
 </div>
 
 <style type="scss">
@@ -40,7 +48,7 @@
         a {
             color: $clr-accent1;
             display: inline-block;
-            transition: 0.2s ease;
+            transition: 0.1s;
             text-decoration: none;
 
             &:visited,
@@ -51,10 +59,11 @@
 
             &:hover {
                 opacity: 0.9;
-                scale: 1.07;
+                scale: 1.02;
+                transform: translateY(-5%);
             }
         }
-        
+
         h1 {
             font-family: $ff-pixel;
             font-size-adjust: 0.7;
@@ -64,16 +73,17 @@
     :root {
         background-color: $clr-dark;
         color: $clr-light;
+
         font-family: $ff-primary;
         font-size: 1.4rem;
     }
 
     #app {
-        width: 100%;
-        min-height: 100vh;
-
         display: flex;
         flex-direction: column;
+
+        width: 100%;
+        min-height: 100vh;
         font-size: max(min(2.8vw, 1.1em), 0.9em);
     }
 
@@ -82,11 +92,17 @@
 
         display: flex;
         justify-content: center;
+
+        .page-container {
+            max-width: 1300px;
+            width: 90%;
+            margin: 3vh 0;
+        }
     }
 
-    .page-container {
-        max-width: 1300px;
-        width: 90%;
-        margin: 3vh 0;
+    footer {
+        background-color: $clr-dark-darker;
+        text-align: center;
+        padding: 2em 5vw;
     }
 </style>

@@ -7,14 +7,14 @@
 
 <header>
     <div class="header-container">
+        <div class="burger-container">
+            <Burger {links} />
+        </div>
         <img src="/logo.svg" alt="logo" class="logo" />
         <div class="header-links">
             {#each links as link}
                 <NavLink href={link.href}>{link.name}</NavLink>
             {/each}
-        </div>
-        <div class="burger-container">
-            <Burger {links} />
         </div>
     </div>
 </header>
@@ -48,12 +48,13 @@
 
         height: 100%;
         width: 100%;
+        padding: 0 .3em;
 
         .logo {
             border-radius: 3px;
             background-color: white;
             padding: 3px 6px;
-            height: calc($header-height * 0.70);
+            height: calc($header-height * 0.7);
         }
     }
 

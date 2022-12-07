@@ -1,9 +1,10 @@
 import PocketBase from 'pocketbase';
 
 import type { Handle } from '@sveltejs/kit';
+import config from '$/config';
 
 export const handle: Handle = async ({ event, resolve }) => {
-	event.locals.pb = new PocketBase('https://advent.gympos.sk/pb/');
+	event.locals.pb = new PocketBase(config.pocketbaseUrl);
 	event.locals.pb.authStore.loadFromCookie(event.request.headers.get('cookie') || '');
 
 	if (event.locals.pb.authStore.isValid) {

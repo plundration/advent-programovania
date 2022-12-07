@@ -11,8 +11,7 @@ async function getUserSubmissions(locals: App.Locals) : Promise<Array<Submission
 		const result = await locals.pb.collection('submissions').getList(0, 18, {});
 
 		if (!result.items) return submissions;
-
-		if (result.totalItems > 18) { /* log issue to database */ }
+		// if (result.totalItems > 18) { /* log issue to database */ }
 		
 		submissions = new Array<Submission>(18);
 		

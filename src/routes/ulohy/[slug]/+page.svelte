@@ -8,10 +8,10 @@
 
     let cisloUlohy = parseInt($page.url.pathname.replace(/^.*\//, ''));
     let files: FileList | null = null;
-    
+
     let odovzdane: boolean = false;
-    if (data.submissions && data.submissions[cisloUlohy - 1]) odovzdane = true
-        
+    if (data.submissions && data.submissions[cisloUlohy - 1]) odovzdane = true;
+
     function onSubmit() {
         if (!files) return;
 
@@ -21,11 +21,13 @@
         fetch(`/ulohy/${cisloUlohy}`, {
             method: 'POST',
             body: formData,
-        }).then(res => {
-            window.location.href = '/' // todo need to refresh page with goto somehow
-        }).catch(err => {
-            goto('/error');
-        });
+        })
+            .then(res => {
+                window.location.href = '/'; // todo need to refresh page with goto somehow
+            })
+            .catch(err => {
+                goto('/error');
+            });
     }
 </script>
 
@@ -38,32 +40,39 @@
     <svelte:component this={data.content} />
 </article>
 
-<div class="submission">
-    {#if odovzdane}
-        <div class="is-submitted">
-            Už odovzdané
-            <img
-                class="check"
-                src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Eo_circle_green_checkmark.svg"
-                alt="checkmark"
-            />
+{#if data.user}
+    <div class="submission">
+        {#if odovzdane}
+            <div class="is-submitted">
+                Už odovzdané
+                <img
+                    class="check"
+                    src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Eo_circle_green_checkmark.svg"
+                    alt="checkmark"
+                />
+            </div>
+        {/if}
+        <div class="file-form">
+            <div class="file-picker">
+                <label>
+                    Vyberte súbor
+                    <input name="file" accept="text/*" bind:files type="file" />
+                </label>
+                {#if files}
+                    {#each files as file}
+                        <span>{file.name}</span>
+                    {/each}
+                {/if}
+            </div>
+            <Button disabled={!files || files.length === 0} onClick={onSubmit}>Odovzdať</Button>
         </div>
-    {/if}
-    <div class="file-form">
-        <div class="file-picker">
-            <label>
-                Vyberte súbor
-                <input name="file" accept="text/*" bind:files type="file" />
-            </label>
-            {#if files}
-                {#each files as file}
-                    <span>{file.name}</span>
-                {/each}
-            {/if}
-        </div>
-        <Button disabled={!files || files.length === 0} onClick={onSubmit}>Odovzdať</Button>
     </div>
-</div>
+{:else}
+    <div class="submission">
+        <p>Registrujte sa pre odovzdanie</p>
+        <Button onClick={() => goto('/')}>Registrácia</Button>
+    </div>
+{/if}
 
 <style lang="scss">
     @import '../../../Settings.scss';

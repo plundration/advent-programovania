@@ -70,7 +70,7 @@
 {:else}
     <div class="submission">
         <p>Registrujte sa pre odovzdanie</p>
-        <Button onClick={() => goto('/')}>Registrácia</Button>
+        <Button onClick={() => goto('/form/registracia')}>Registrácia</Button>
     </div>
 {/if}
 

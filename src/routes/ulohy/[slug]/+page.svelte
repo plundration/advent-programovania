@@ -91,7 +91,7 @@
     :global {
         .markdown-article {
             p {
-                margin: 0.5em 0;
+                margin: 1.0em 0;
             }
 
             h1, h2, h3, h4 {

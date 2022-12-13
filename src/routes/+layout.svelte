@@ -35,7 +35,7 @@
     <footer>
         <p>Túto súťaž pre vás pripravili:</p>
         <p><a href="https://pavolkomlos.xyz">Pavol Alexander Komloš</a></p>
-        <p><a href="https://harmansky.xyz">Adam Harmanský</a></p>
+        <p><a href="https://www.harmansky.xyz">Adam Harmanský</a></p>
         <br />
         <p>Neváhajte nás kontaktovať v prípade potreby pomoci</p>
     </footer>

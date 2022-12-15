@@ -12,7 +12,7 @@
     bude každá úloha sprevádzaná krátkou lekciou/vysvetlením problematiky.
 </p>
 
-<h2>OZNAM: Rozhodli sme sa prezatiaľ súťaž ukončiť, nemáme čas a hlavne motiváciu pokračovať, lebo sa neregistrovalo dosť ľudí, ak však chcete aby sme pokračovali, napíšte nám (kontakty sú dole)</h2>
+<h2> OZNAM: Z dôvodu (veľmi) nízkeho záujmu sa súťaž ruší. Ak by sa záujem obnovil, kontaktujte nás na adresách na spodku stránky </h2>
 
 <div class="ulohy">
     <h2>Úlohy</h2>
